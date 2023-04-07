@@ -1,4 +1,10 @@
-a  = 123
-b = /* Isso nao vai ser reportado */ 456;
-c = a  + b + 789 * 0;
-c;
+main(){
+    print fat(10)[0];
+}
+
+fat(num :: Int) : Int {
+    if(num < 1)
+        return 1;
+    else
+        return num * fat(num - 1)[0]
+}

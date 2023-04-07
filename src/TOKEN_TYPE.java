@@ -5,8 +5,20 @@ public enum TOKEN_TYPE {
     PLUS,
     TIMES,
     SEMI,
-    AP, // (
-    FP, // )
-    PRINT, 
+    MINUS,
+    OPEN_PARENTHESIS, // (
+    CLOSE_PARENTHESIS, // )
+    OPEN_BRACKETS, // {
+    CLOSE_BRACKETS, // }
+    OPEN_ANGLEBRACKETS, // [
+    CLOSE_ANGLEBRACKETS, // ]
+    LESS_THAN,
+    BIGGER_THAN,
+    PRINT,
     WHILE,
+    TYPE,
+    BOOLEAN,
+    RESERVED_WORD,
+    RETURN_TYPE_ATTRIBUTTION,
+    TYPE_ATTRIBUTTION,
 }
