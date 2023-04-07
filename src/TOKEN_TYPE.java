@@ -1,6 +1,7 @@
 public enum TOKEN_TYPE {
     ID,
     NUM,
+    FLOAT,
     EQ,
     PLUS,
     TIMES,
@@ -16,9 +17,11 @@ public enum TOKEN_TYPE {
     DISJUNCTION,
     NULL,
     CHAR,
+    BACKSLASH,
     LOGICAL_NEGATION,
     OPEN_PARENTHESIS, // (
     CLOSE_PARENTHESIS, // )
+    QUOTATION, // '
     OPEN_BRACKETS, // {
     CLOSE_BRACKETS, // }
     OPEN_ANGLEBRACKETS, // [

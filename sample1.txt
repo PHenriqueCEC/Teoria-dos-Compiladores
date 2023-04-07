@@ -1,5 +1,12 @@
+-- ISSO é um comentário
 main(){
+    num20 = 10;
+    num10 = 000000000000.25959595959;
+    num3= 1.0;
+    num4 = 1.;
+    num__10;
     print fat(10)[0];
+
 }
 
 fat(num :: Int) : Int {

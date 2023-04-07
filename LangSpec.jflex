@@ -15,6 +15,7 @@
 
 %{
     private int numberOfTokensReaded;
+
     
     public int readedTokens(){
        return numberOfTokensReaded;
@@ -38,9 +39,10 @@
   /* Agora vamos definir algumas macros */
   endOfLine  = \r|\n|\r\n
   whitespace     = {endOfLine} | [ \t\f]
-  integer      = [:digit:] [:digit:]*
-  char         = \'[:uppercase:] | [:lowercase:]\' 
-  identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* ) *
+  integer      = [:digit:]+
+  float        = [:digit:]*\.[:digit:]+
+  char         = '[:uppercase:] | [:lowercase:]'
+  identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *
   lineComment = "--" (.)* {endOfLine}
   type= "Int" | "Char" | "Bool" | "Float"
   reservedWord = "if" | "else" | "iterate" | "read" | "print" | "return"
@@ -52,6 +54,7 @@
 %%
 
 <YYINITIAL>{
+    {whitespace}    {}
     {boolean}      { return symbol(TOKEN_TYPE.BOOLEAN);}
     "null"          { return symbol(TOKEN_TYPE.NULL);  }
     {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
@@ -59,7 +62,7 @@
     {char}          { return symbol(TOKEN_TYPE.CHAR);}
     {identifier}    { return symbol(TOKEN_TYPE.ID);   }
     {integer}       { return symbol(TOKEN_TYPE.NUM, Integer.parseInt(yytext()) );  }
-    {whitespace}    {}
+    {float}         { return symbol(TOKEN_TYPE.FLOAT); }
     {lineComment}   {}
     "{-"            { yybegin(COMMENT);               }
     "=="            { return symbol(TOKEN_TYPE.EQUAL);}
@@ -82,6 +85,8 @@
     "!"             { return symbol(TOKEN_TYPE.LOGICAL_NEGATION);}
     "("             { return symbol(TOKEN_TYPE.OPEN_PARENTHESIS);}
     ")"             { return symbol(TOKEN_TYPE.CLOSE_PARENTHESIS);}
+    "'"             { return symbol(TOKEN_TYPE.QUOTATION);}
+    "\\"             { return symbol(TOKEN_TYPE.BACKSLASH);}
     "{"             { return symbol(TOKEN_TYPE.OPEN_BRACKETS);}
     "}"             { return symbol(TOKEN_TYPE.CLOSE_BRACKETS);}
     "["             { return symbol(TOKEN_TYPE.OPEN_ANGLEBRACKETS);}
@@ -96,7 +101,7 @@
 
 
 [^] { 
-    throw new RuntimeException("Illegal character <"+yytext()+">" + " at line : " + yyline+1 + " and column: " + yycolumn+1); 
+    throw new RuntimeException("Illegal character <"+yytext()+">" + " at line : " + (yyline+1) + " and column: " + (yycolumn+1)); 
     }
 
 
