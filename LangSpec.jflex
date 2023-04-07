@@ -39,8 +39,9 @@
   endOfLine  = \r|\n|\r\n
   whitespace     = {endOfLine} | [ \t\f]
   integer      = [:digit:] [:digit:]*
+  char         = \'[:uppercase:] | [:lowercase:]\' 
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* ) *
-  lineComment = "//" (.)* {endOfLine}
+  lineComment = "--" (.)* {endOfLine}
   type= "Int" | "Char" | "Bool" | "Float"
   reservedWord = "if" | "else" | "iterate" | "read" | "print" | "return"
   boolean= "true" | "false"
@@ -51,41 +52,52 @@
 %%
 
 <YYINITIAL>{
-    {identifier} { return symbol(TOKEN_TYPE.ID);   }
-    {integer}      { return symbol(TOKEN_TYPE.NUM, Integer.parseInt(yytext()) );  }
+    {boolean}      { return symbol(TOKEN_TYPE.BOOLEAN);}
+    "null"          { return symbol(TOKEN_TYPE.NULL);  }
+    {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
+    {type}          { return symbol(TOKEN_TYPE.TYPE);}
+    {char}          { return symbol(TOKEN_TYPE.CHAR);}
+    {identifier}    { return symbol(TOKEN_TYPE.ID);   }
+    {integer}       { return symbol(TOKEN_TYPE.NUM, Integer.parseInt(yytext()) );  }
+    {whitespace}    {}
+    {lineComment}   {}
+    "{-"            { yybegin(COMMENT);               }
+    "=="            { return symbol(TOKEN_TYPE.EQUAL);}
     "="             { return symbol(TOKEN_TYPE.EQ);   }
     ";"             { return symbol(TOKEN_TYPE.SEMI); }
     "*"             { return symbol(TOKEN_TYPE.TIMES); }
     "+"             { return symbol(TOKEN_TYPE.PLUS); }
     "-"             { return symbol(TOKEN_TYPE.MINUS); }
-    "/*"            { yybegin(COMMENT);               }
+    "/"             { return symbol(TOKEN_TYPE.DIVISION); }
     "<"             { return symbol(TOKEN_TYPE.LESS_THAN); }
     ">"             { return symbol(TOKEN_TYPE.BIGGER_THAN); }
-    {whitespace}    {}
-    {lineComment}   {}
-    {type}          { return symbol(TOKEN_TYPE.TYPE);}
-    {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
+    "%"             { return symbol(TOKEN_TYPE.PERCENT_SIGN);}
+    ","             { return symbol(TOKEN_TYPE.COMMA);}
+    "."             { return symbol(TOKEN_TYPE.DOT);}
+    "!="            { return symbol(TOKEN_TYPE.DIFFERENCE);}
+    "&&"            { return symbol(TOKEN_TYPE.CONJUNCTION);}
     "::"            { return symbol(TOKEN_TYPE.TYPE_ATTRIBUTTION);}
     ":"             { return symbol(TOKEN_TYPE.RETURN_TYPE_ATTRIBUTTION);}
+    "!="            { return symbol(TOKEN_TYPE.DIFFERENCE);}
+    "!"             { return symbol(TOKEN_TYPE.LOGICAL_NEGATION);}
     "("             { return symbol(TOKEN_TYPE.OPEN_PARENTHESIS);}
     ")"             { return symbol(TOKEN_TYPE.CLOSE_PARENTHESIS);}
     "{"             { return symbol(TOKEN_TYPE.OPEN_BRACKETS);}
     "}"             { return symbol(TOKEN_TYPE.CLOSE_BRACKETS);}
     "["             { return symbol(TOKEN_TYPE.OPEN_ANGLEBRACKETS);}
     "]"             { return symbol(TOKEN_TYPE.CLOSE_ANGLEBRACKETS);}
-    {boolean}       {return symbol(TOKEN_TYPE.BOOLEAN);}
-    
-    
 }
 
 <COMMENT>{
-   "*/"     { yybegin(YYINITIAL); }     
-   [^"*/"]* {                     }
+   "-}"     { yybegin(YYINITIAL); }     
+   [^"-}"]* {                     }
 }
 
 
 
-[^] { throw new RuntimeException("Illegal character <"+yytext()+">" + " at line : " + yyline + " and column: " + yycolumn); }
+[^] { 
+    throw new RuntimeException("Illegal character <"+yytext()+">" + " at line : " + yyline+1 + " and column: " + yycolumn+1); 
+    }
 
 
 

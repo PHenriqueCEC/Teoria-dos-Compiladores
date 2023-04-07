@@ -6,6 +6,17 @@ public enum TOKEN_TYPE {
     TIMES,
     SEMI,
     MINUS,
+    DIVISION,
+    PERCENT_SIGN,
+    COMMA,
+    EQUAL,
+    DOT,
+    DIFFERENCE,
+    CONJUNCTION,
+    DISJUNCTION,
+    NULL,
+    CHAR,
+    LOGICAL_NEGATION,
     OPEN_PARENTHESIS, // (
     CLOSE_PARENTHESIS, // )
     OPEN_BRACKETS, // {
