@@ -1,37 +1,41 @@
 
 public class Token {
-      public int l, c;
-      public TOKEN_TYPE t;
+      public int line, column;
+      public TOKEN_TYPE type;
       public String lexeme;
       public Object info;
 
-      public Token(TOKEN_TYPE t, String lex, Object o, int l, int c) {
-            this.t = t;
-            lexeme = lex;
-            info = o;
-            this.l = l;
-            this.c = c;
+      public Token(TOKEN_TYPE type, String lexeme, Object info, int line, int column) {
+            this.type = type;
+            this.lexeme = lexeme;
+            this.info = info;
+            this.line = line;
+            this.column = column;
       }
 
-      public Token(TOKEN_TYPE t, String lex, int l, int c) {
-            this.t = t;
-            lexeme = lex;
-            info = null;
-            this.l = l;
-            this.c = c;
+      public Token(TOKEN_TYPE type, String lexeme, int line, int column) {
+            this.type = type;
+            this.lexeme = lexeme;
+            this.info = null;
+            this.line = line;
+            this.column = column;
       }
 
-      public Token(TOKEN_TYPE t, Object o, int l, int c) {
-            this.t = t;
-            lexeme = "";
-            info = o;
-            this.l = l;
-            this.c = c;
+      public Token(TOKEN_TYPE type, Object info, int line, int column) {
+            this.type = type;
+            this.lexeme = "";
+            this.info = info;
+            this.line = line;
+            this.column = column;
       }
 
       @Override
       public String toString() {
-            return "[(" + l + "," + c + ") \"" + t + " : " + lexeme + "\" : <" + (info == null ? "" : info.toString())
-                        + ">]";
+            String positionIndicationExpr = " (" + line + "," + column + ") ";
+
+            String lexemeValue = this.info == null ? this.lexeme : this.info.toString();
+            String lexemeWithValue = this.type + " : \"" + lexemeValue + "\"";
+
+            return positionIndicationExpr + lexemeWithValue;
       }
 }
