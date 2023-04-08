@@ -1017,7 +1017,7 @@ class LexicalAnalyzer {
             // fall through
           case 50: break;
           case 14:
-            { return symbol(TOKEN_TYPE.NUM, Integer.parseInt(yytext()) );
+            { return symbol(TOKEN_TYPE.INTEGER, Integer.parseInt(yytext()) );
             }
             // fall through
           case 51: break;
@@ -1122,7 +1122,7 @@ class LexicalAnalyzer {
             // fall through
           case 71: break;
           case 35:
-            { return symbol(TOKEN_TYPE.IDNAME);
+            { return symbol(TOKEN_TYPE.TYPE);
             }
             // fall through
           case 72: break;
