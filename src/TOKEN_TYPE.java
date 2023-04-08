@@ -1,5 +1,6 @@
 public enum TOKEN_TYPE {
     ID,
+    IDNAME,
     NUM,
     FLOAT,
     EQ,
@@ -8,7 +9,7 @@ public enum TOKEN_TYPE {
     SEMI,
     MINUS,
     DIVISION,
-    PERCENT_SIGN,
+    PERCENT_SIGN, //Trocar para mod?
     COMMA,
     EQUAL,
     DOT,
