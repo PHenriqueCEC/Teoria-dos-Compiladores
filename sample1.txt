@@ -1,5 +1,5 @@
 -- ISSO é um comentário
-main(){
+main(param :: Int){
     
     Racional { numerador :: Int ;
                 denominador :: Int ;

@@ -35,12 +35,8 @@
     numberOfTokensReaded = 0; // Isto é copiado direto no construtor do lexer. 
 %init}
 
-  
-  /* Agora vamos definir algumas macros */
-
   endOfLine  = \r|\n|\r\n
   whitespace     = {endOfLine} | [ \t\f]
-  
   integer      = [:digit:]+
   float        = [:digit:]*\.[:digit:]+
   char         = '[:uppercase:] | [:lowercase:]'
@@ -48,10 +44,8 @@
   
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *
   lineComment = "--" (.)* {endOfLine}
-  type= "Int" | "Char" | "Bool" | "Float"
 
   reservedWord = "if" | "else" | "iterate" | "read" | "print" | "return"
-
   typeName = [:uppercase:] [:lowercase:]+ ([:uppercase:] | [:lowercase:])+
 
   
@@ -64,11 +58,10 @@
     {boolean}      { return symbol(TOKEN_TYPE.BOOLEAN);}
     "null"          { return symbol(TOKEN_TYPE.NULL);  }
     {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
-    {typeName}      { return symbol(TOKEN_TYPE.IDNAME);}
-    {type}          { return symbol(TOKEN_TYPE.TYPE);}
+    {typeName}      { return symbol(TOKEN_TYPE.TYPE);}
     {char}          { return symbol(TOKEN_TYPE.CHAR);}
     {identifier}    { return symbol(TOKEN_TYPE.ID);   }
-    {integer}       { return symbol(TOKEN_TYPE.NUM, Integer.parseInt(yytext()) );  }
+    {integer}       { return symbol(TOKEN_TYPE.INTEGER, Integer.parseInt(yytext()) );  }
     {float}         { return symbol(TOKEN_TYPE.FLOAT); }
     {lineComment}   {}
     "{-"            { yybegin(COMMENT);               }
@@ -93,7 +86,7 @@
     "("             { return symbol(TOKEN_TYPE.OPEN_PARENTHESIS);}
     ")"             { return symbol(TOKEN_TYPE.CLOSE_PARENTHESIS);}
     "'"             { return symbol(TOKEN_TYPE.QUOTATION);}
-    "\\"             { return symbol(TOKEN_TYPE.BACKSLASH);}
+    "\\"            { return symbol(TOKEN_TYPE.BACKSLASH);}
     "{"             { return symbol(TOKEN_TYPE.OPEN_BRACKETS);}
     "}"             { return symbol(TOKEN_TYPE.CLOSE_BRACKETS);}
     "["             { return symbol(TOKEN_TYPE.OPEN_ANGLEBRACKETS);}
