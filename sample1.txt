@@ -1,5 +1,9 @@
 -- ISSO é um comentário
 main(){
+    
+    Racional { numerador :: Int ;
+                denominador :: Int ;
+}
     num20 = 10;
     num10 = 000000000000.25959595959;
     num3= 1.0;

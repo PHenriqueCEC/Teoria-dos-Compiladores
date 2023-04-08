@@ -37,16 +37,22 @@
 
   
   /* Agora vamos definir algumas macros */
+
   endOfLine  = \r|\n|\r\n
   whitespace     = {endOfLine} | [ \t\f]
+  
   integer      = [:digit:]+
   float        = [:digit:]*\.[:digit:]+
   char         = '[:uppercase:] | [:lowercase:]'
+  boolean= "true" | "false"
+  
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *
   lineComment = "--" (.)* {endOfLine}
   type= "Int" | "Char" | "Bool" | "Float"
+
   reservedWord = "if" | "else" | "iterate" | "read" | "print" | "return"
-  boolean= "true" | "false"
+
+  typeName = [:uppercase:] [:lowercase:]+ ([:uppercase:] | [:lowercase:])+
 
   
 %state COMMENT
@@ -58,6 +64,7 @@
     {boolean}      { return symbol(TOKEN_TYPE.BOOLEAN);}
     "null"          { return symbol(TOKEN_TYPE.NULL);  }
     {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
+    {typeName}      { return symbol(TOKEN_TYPE.IDNAME);}
     {type}          { return symbol(TOKEN_TYPE.TYPE);}
     {char}          { return symbol(TOKEN_TYPE.CHAR);}
     {identifier}    { return symbol(TOKEN_TYPE.ID);   }
