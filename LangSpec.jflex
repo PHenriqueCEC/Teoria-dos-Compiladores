@@ -1,3 +1,7 @@
+/*  
+    Matheus Gomes Luz Werneck (201835037) 
+    Pedro Henrique Almeida Cardoso Reis (201835039)
+*/
 
  /*  Esta seção é copiada antes da declaração da classe do analisador léxico.
   *  É nesta seção que se deve incluir imports e declaração de pacotes.

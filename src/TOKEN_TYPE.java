@@ -1,3 +1,8 @@
+/*
+   Matheus Gomes Luz Werneck (201835037) 
+   Pedro Henrique Almeida Cardoso Reis (201835039)
+*/
+
 public enum TOKEN_TYPE {
     ID,
     INTEGER,
