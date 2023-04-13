@@ -37,7 +37,8 @@
   whitespace     = {endOfLine} | [ \t\f]
   integer      = [:digit:]+
   float        = [:digit:]*\.[:digit:]+
-  char         = '[:uppercase:] | [:lowercase:]'
+  whiteSpaceChars = \\t | \\n | \\b | \\r
+  char         = '([:uppercase:] | [:lowercase:] | \\ | \\' | {whiteSpaceChars})'
   boolean= "true" | "false"
   
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *
@@ -53,7 +54,7 @@
 
 <YYINITIAL>{
     {whitespace}    {}
-    {boolean}      { return symbol(TOKEN_TYPE.BOOLEAN);}
+    {boolean}       { return symbol(TOKEN_TYPE.BOOLEAN);}
     "null"          { return symbol(TOKEN_TYPE.NULL);  }
     {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
     {typeName}      { return symbol(TOKEN_TYPE.TYPE);}
@@ -75,7 +76,6 @@
     "%"             { return symbol(TOKEN_TYPE.PERCENT_SIGN);}
     ","             { return symbol(TOKEN_TYPE.COMMA);}
     "."             { return symbol(TOKEN_TYPE.DOT);}
-    "!="            { return symbol(TOKEN_TYPE.DIFFERENCE);}
     "&&"            { return symbol(TOKEN_TYPE.CONJUNCTION);}
     "::"            { return symbol(TOKEN_TYPE.TYPE_ATTRIBUTTION);}
     ":"             { return symbol(TOKEN_TYPE.RETURN_TYPE_ATTRIBUTTION);}
