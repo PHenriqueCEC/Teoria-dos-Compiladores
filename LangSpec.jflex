@@ -51,7 +51,7 @@
 %state COMMENT
 
 %%
-
+//Referente ao processamento dos Tokens. Encontramos os tokens e returnamos ele
 <YYINITIAL>{
     {whitespace}    {}
     {bool}       { return symbol(TOKEN_TYPE.BOOL);}
