@@ -5,7 +5,7 @@
 
 public enum TOKEN_TYPE {
     ID,
-    INTEGER,
+    INT,
     FLOAT,
     EQ,
     PLUS,
@@ -36,7 +36,7 @@ public enum TOKEN_TYPE {
     PRINT,
     WHILE,
     TYPE,
-    BOOLEAN,
+    BOOL,
     RESERVED_WORD,
     RETURN_TYPE_ATTRIBUTTION,
     TYPE_ATTRIBUTTION,

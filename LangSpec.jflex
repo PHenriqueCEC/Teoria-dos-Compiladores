@@ -35,16 +35,16 @@
 
   endOfLine  = \r|\n|\r\n
   whitespace     = {endOfLine} | [ \t\f]
-  integer      = [:digit:]+
+  int     = [:digit:]+
   float        = [:digit:]*\.[:digit:]+
   whiteSpaceChars = \\t | \\n | \\b | \\r
   char         = '([:uppercase:] | [:lowercase:] | \\ | \\' | {whiteSpaceChars})'
-  boolean= "true" | "false"
+  bool= "true" | "false"
   
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *
   lineComment = "--" (.)* {endOfLine}
 
-  reservedWord = "if" | "else" | "iterate" | "read" | "print" | "return"
+  reservedWord = "if" | "then" | "else" | "iterate" | "read" | "print" | "return" 
   typeName = [:uppercase:] [:lowercase:]+ ([:uppercase:] | [:lowercase:])+
 
   
@@ -54,13 +54,13 @@
 
 <YYINITIAL>{
     {whitespace}    {}
-    {boolean}       { return symbol(TOKEN_TYPE.BOOLEAN);}
+    {bool}       { return symbol(TOKEN_TYPE.BOOL);}
     "null"          { return symbol(TOKEN_TYPE.NULL);  }
     {reservedWord}  { return symbol(TOKEN_TYPE.RESERVED_WORD);}
     {typeName}      { return symbol(TOKEN_TYPE.TYPE);}
     {char}          { return symbol(TOKEN_TYPE.CHAR);}
     {identifier}    { return symbol(TOKEN_TYPE.ID);   }
-    {integer}       { return symbol(TOKEN_TYPE.INTEGER, Integer.parseInt(yytext()) );  }
+    {int}       { return symbol(TOKEN_TYPE.INT, Int.parseInt(yytext()) );  }
     {float}         { return symbol(TOKEN_TYPE.FLOAT); }
     {lineComment}   {}
     "{-"            { yybegin(COMMENT);               }
