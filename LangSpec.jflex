@@ -60,7 +60,7 @@
     {typeName}      { return symbol(TOKEN_TYPE.TYPE);}
     {char}          { return symbol(TOKEN_TYPE.CHAR);}
     {identifier}    { return symbol(TOKEN_TYPE.ID);   }
-    {int}       { return symbol(TOKEN_TYPE.INT, Int.parseInt(yytext()) );  }
+    {int}       { return symbol(TOKEN_TYPE.INT, Integer.parseInt(yytext()) );  }
     {float}         { return symbol(TOKEN_TYPE.FLOAT); }
     {lineComment}   {}
     "{-"            { yybegin(COMMENT);               }
