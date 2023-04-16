@@ -38,7 +38,7 @@
   int     = [:digit:]+
   float        = [:digit:]*\.[:digit:]+
   whiteSpaceChars = \\t | \\n | \\b | \\r
-  char         = '([:uppercase:] | [:lowercase:] | \\ | \\' | {whiteSpaceChars})'
+  char         = '([:uppercase:] | [:lowercase:] | \\ | \\\\ | \\' | {whiteSpaceChars})'
   bool= "true" | "false"
   
   identifier = [:lowercase:]+ ( [:lowercase:]* [_]* [:uppercase:]* [:digit:]* ) *

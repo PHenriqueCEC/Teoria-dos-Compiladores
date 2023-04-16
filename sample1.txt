@@ -10,6 +10,6 @@ main(param :: Int){
     num4 = 1.;
     num__10;
     print fat(10)[0];
-    num6 = 'a';
+    num6 = '\\';
 
 }
