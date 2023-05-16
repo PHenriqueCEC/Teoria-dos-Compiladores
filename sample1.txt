@@ -13,3 +13,14 @@ main(param :: Int){
     num6 = '\\';
 
 }
+
+Arquivo ou diretório inexistentecJflex.sh
+error: invalid flag: src/*.java
+Usage: javac <options> <source files>
+use --help for a list of possible options
+./compileFolder.sh: linha 9: erro de sintaxe próximo ao token inesperado `$'do\r''
+'/compileFolder.sh: linha 9: `   for file in $(find ../testes/semantica/certo -name "*.lan"); do
+[leonardo@leonardo-pc matheus_pedro]$ ./compileAndRun.sh ../testes/lex/ilegal.lan
+: Arquivo ou diretório inexistentecJflex.sh
+error: invalid flag: src/*.java
+Usage:
